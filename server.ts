@@ -38,14 +38,25 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/pastes/", async (req, res) => {
-  const {title, paste} = req.body
   try {
+    const {title, paste} = req.body
     const dbres = await client.query('insert into pastes (title, paste) values ($1, $2) returning *', [title, paste])
     res.json(dbres.rows);
   } catch (error) {
     console.error(error);
+    res.send(error)
   }
 })
+
+app.get("/latest/:number", async (req, res) => {
+  const number = req.params.number;
+  try {
+    const dbres = await client.query('select * from pastes order by time desc limit $1', [number]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 
 //Start the server on the given port
