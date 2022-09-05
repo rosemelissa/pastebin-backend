@@ -12,12 +12,13 @@ config(); //Read .env file lines as though they were env vars.
 // false - when connecting to a local DB
 // { rejectUnauthorized: false } - when connecting to a heroku DB
 const herokuSSLSetting = { rejectUnauthorized: false }
-const sslSetting = process.env.LOCAL ? false : herokuSSLSetting
+// const sslSetting = process.env.LOCAL ? false : herokuSSLSetting
+const sslSetting = herokuSSLSetting;
 const dbConfig = {
   connectionString: process.env.DATABASE_URL,
   ssl: sslSetting,
 };
-
+console.log(sslSetting)
 const app = express();
 
 app.use(express.json()); //add body parser to each following route handler
@@ -27,7 +28,8 @@ const client = new Client(dbConfig);
 client.connect();
 
 app.get("/", async (req, res) => {
-  const dbres = await client.query('select * from categories');
+  // res.json({message: "success"})
+  const dbres = await client.query('select * from pastes');
   res.json(dbres.rows);
 });
 
