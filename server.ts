@@ -35,8 +35,17 @@ app.get("/", async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-  
 });
+
+app.post("/pastes/", async (req, res) => {
+  const {title, paste} = req.body
+  try {
+    const dbres = await client.query('insert into pastes (title, paste) values ($1, $2) returning *', [title, paste])
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+})
 
 
 //Start the server on the given port
