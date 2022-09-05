@@ -29,8 +29,13 @@ client.connect();
 
 app.get("/", async (req, res) => {
   // res.json({message: "success"})
-  const dbres = await client.query('select * from pastes');
-  res.json(dbres.rows);
+  try {
+    const dbres = await client.query('select * from pastes');
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+  
 });
 
 
