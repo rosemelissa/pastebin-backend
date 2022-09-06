@@ -114,28 +114,17 @@
 		},
 		{
 			"name": "localhost:4000/latest/10",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"title\": \"first test\",\n    \"paste\": \"testing the posting mechanism\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:4000/latest/10",
+					"raw": "localhost:4000/pastes/latest/10",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
+						"pastes",
 						"latest",
 						"10"
 					]
@@ -198,16 +187,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:4000/pastes/1/comments/2",
+					"raw": "localhost:4000/pastes/comments/3",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"pastes",
-						"1",
 						"comments",
-						"2"
+						"3"
 					]
 				}
 			},
