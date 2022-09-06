@@ -58,6 +58,18 @@ app.get("/pastes/latest/:number", async (req, res) => {
   }
 });
 
+// delete paste
+app.delete("/pastes/:pasteId", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  try {
+    await client.query('DELETE FROM comments WHERE paste_id = $1', [pasteId]);
+    const dbres = await client.query('DELETE FROM  pastes WHERE id = $1 RETURNING *', [pasteId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // create comment
 app.post("/pastes/:pasteId/comments", async (req, res) => {
   const pasteId = req.params.pasteId;
