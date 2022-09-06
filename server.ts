@@ -48,10 +48,44 @@ app.post("/pastes/", async (req, res) => {
   }
 })
 
-app.get("/latest/:number", async (req, res) => {
+app.get("/pastes/latest/:number", async (req, res) => {
   const number = req.params.number;
   try {
     const dbres = await client.query('select * from pastes order by time desc limit $1', [number]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// create comment
+app.post("/pastes/:pasteId/comments", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  const { message } = req.body;
+  try {
+    const dbres = await client.query("INSERT INTO comments(message, paste_id) VALUES($1, $2) RETURNING *", [message, pasteId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// get all comments
+app.get("/pastes/:pasteId/comments", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  try {
+    const dbres = await client.query('SELECT * FROM comments WHERE paste_id=$1', [pasteId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// delete comment
+app.delete("/pastes/comments/:commentId", async (req, res) => {
+  const commentId = req.params.commentId;
+  try {
+    const dbres = await client.query('DELETE FROM comments WHERE id = $1 RETURNING *', [commentId]);
     res.json(dbres.rows);
   } catch (error) {
     console.error(error);

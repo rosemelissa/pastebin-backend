@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "09365c4b-d4ec-4240-b2d4-f5a62f0ad863",
+		"name": "pastebin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:4000/pastes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"first test\",\n    \"paste\": \"testing the posting mechanism\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/pastes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"pastes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://bhawick-melissa-pastebin.onrender.com/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bhawick-melissa-pastebin.onrender.com/",
+					"protocol": "https",
+					"host": [
+						"bhawick-melissa-pastebin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://bhawick-melissa-pastebin.onrender.com/pastes/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"second post test\",\n    \"paste\": \"paste bit\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bhawick-melissa-pastebin.onrender.com/pastes/",
+					"protocol": "https",
+					"host": [
+						"bhawick-melissa-pastebin",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pastes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4000/pastes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"first test\",\n    \"paste\": \"testing the posting mechanism\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/pastes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"pastes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4000/latest/10",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/pastes/latest/10",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"pastes",
+						"latest",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all comments for paste ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/pastes/1/comments",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"pastes",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment for paste ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"this is a very thoughtful comment\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/pastes/1/comments",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"pastes",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete comment for paste ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/pastes/comments/3",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"pastes",
+						"comments",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
