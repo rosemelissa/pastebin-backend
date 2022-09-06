@@ -48,7 +48,7 @@ app.post("/pastes/", async (req, res) => {
   }
 })
 
-app.get("/latest/:number", async (req, res) => {
+app.get("/pastes/latest/:number", async (req, res) => {
   const number = req.params.number;
   try {
     const dbres = await client.query('select * from pastes order by time desc limit $1', [number]);
@@ -82,8 +82,7 @@ app.get("/pastes/:pasteId/comments", async (req, res) => {
 });
 
 // delete comment
-app.delete("/pastes/:pasteId/comments/:commentId", async (req, res) => {
-  const pasteId = req.params.pasteId;
+app.delete("/pastes/comments/:commentId", async (req, res) => {
   const commentId = req.params.commentId;
   try {
     const dbres = await client.query('DELETE FROM comments WHERE id = $1 RETURNING *', [commentId]);
