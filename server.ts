@@ -58,6 +58,41 @@ app.get("/latest/:number", async (req, res) => {
   }
 });
 
+// create comment
+app.post("/pastes/:pasteId/comments", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  const { message } = req.body;
+  try {
+    const dbres = await client.query("INSERT INTO comments(message, paste_id) VALUES($1, $2) RETURNING *", [message, pasteId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// get all comments
+app.get("/pastes/:pasteId/comments", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  try {
+    const dbres = await client.query('SELECT * FROM comments WHERE paste_id=$1', [pasteId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// delete comment
+app.delete("/pastes/:pasteId/comments/:commentId", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  const commentId = req.params.commentId;
+  try {
+    const dbres = await client.query('DELETE FROM comments WHERE id = $1 RETURNING *', [commentId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 
 //Start the server on the given port
 const port = process.env.PORT;
