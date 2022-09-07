@@ -70,6 +70,18 @@ app.delete("/pastes/:pasteId", async (req, res) => {
   }
 });
 
+// edit paste
+app.put("/pastes/:pasteId", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  const {title, paste} = req.body;
+  try {
+    const dbres = await client.query("UPDATE pastes SET title=$1, paste=$2 WHERE id=$3 RETURNING *", [title, paste, pasteId]);
+    res.json(dbres.rows);
+  } catch (error) {
+    console.error(error);
+  }
+})
+
 // create comment
 app.post("/pastes/:pasteId/comments", async (req, res) => {
   const pasteId = req.params.pasteId;
