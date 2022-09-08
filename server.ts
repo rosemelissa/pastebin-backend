@@ -48,6 +48,16 @@ app.post("/pastes/", async (req, res) => {
   }
 })
 
+app.get("/pastes/:pasteId", async (req, res) => {
+  const pasteId = req.params.pasteId;
+  try {
+    const dbres = await client.query('select * from pastes where id=$1', [pasteId]);
+    res.json(dbres.rows[0]); // TODO ensure 1 single row of results
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 app.get("/pastes/latest/:number", async (req, res) => {
   const number = req.params.number;
   try {
